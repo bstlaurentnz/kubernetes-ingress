@@ -97,7 +97,7 @@ spec:
     spec:
       containers:
       - name: ingress-default-backend
-        image: gcr.io/google_containers/defaultbackend:1.0
+        image: gcr.io/google_containers/defaultbackend-arm64:1.0
         ports:
         - containerPort: 8080
 
@@ -139,7 +139,7 @@ spec:
       serviceAccountName: haproxy-ingress-service-account
       containers:
       - name: haproxy-ingress
-        image: haproxytech/kubernetes-ingress
+        image: zxpikates.azurecr.io/kubernetes-ingress
         args:
           - --configmap=haproxy-controller/haproxy
           - --default-backend-service=haproxy-controller/ingress-default-backend
@@ -169,7 +169,9 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-
+      imagePullSecrets:
+          - name: azr-secret
+          - namespace: default
 ---
 apiVersion: v1
 kind: Service

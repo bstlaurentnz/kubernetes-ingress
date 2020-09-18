@@ -97,7 +97,7 @@ spec:
     spec:
       containers:
       - name: ingress-default-backend
-        image: gcr.io/google_containers/defaultbackend:1.0
+        image: gcr.io/google_containers/defaultbackend-arm64:1.0
         ports:
         - containerPort: 8080
 
@@ -139,7 +139,7 @@ spec:
       serviceAccountName: haproxy-ingress-service-account
       containers:
       - name: haproxy-ingress
-        image: haproxytech/kubernetes-ingress
+        image: haproxytech/kubernetes-ingress-arm64
         args:
           - --configmap=haproxy-controller/haproxy
           - --default-backend-service=haproxy-controller/ingress-default-backend
