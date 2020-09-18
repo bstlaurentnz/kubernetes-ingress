@@ -77,29 +77,29 @@ metadata:
   namespace: haproxy-controller
 data:
 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    run: ingress-default-backend
-  name: ingress-default-backend
-  namespace: haproxy-controller
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      run: ingress-default-backend
-  template:
-    metadata:
-      labels:
-        run: ingress-default-backend
-    spec:
-      containers:
-      - name: ingress-default-backend
-        image: gcr.io/google_containers/defaultbackend:1.0
-        ports:
-        - containerPort: 8080
+#---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     run: ingress-default-backend
+#   name: ingress-default-backend
+#   namespace: haproxy-controller
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       run: ingress-default-backend
+#   template:
+#     metadata:
+#       labels:
+#         run: ingress-default-backend
+#     spec:
+#       containers:
+#       - name: ingress-default-backend
+#         image: gcr.io/google_containers/defaultbackend:1.0
+#         ports:
+#         - containerPort: 8080
 
 ---
 apiVersion: v1
@@ -169,7 +169,9 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-
+      imagePullSecrets:
+          - name: azr-secret
+          - namespace: default
 ---
 apiVersion: v1
 kind: Service
