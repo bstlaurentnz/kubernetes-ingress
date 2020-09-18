@@ -139,7 +139,7 @@ spec:
       serviceAccountName: haproxy-ingress-service-account
       containers:
       - name: haproxy-ingress
-        image: haproxytech/kubernetes-ingress
+        image: zxpikates.azurecr.io/kubernetes-ingress
         args:
           - --configmap=haproxy-controller/haproxy
           - --default-backend-service=haproxy-controller/ingress-default-backend
